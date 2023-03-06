@@ -1,0 +1,290 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Netuno",
+  "patterns": [
+    {
+      "captures": {
+        "1": {
+          "name": "keyword.control.class.netuno"
+        },
+        "2": {
+          "name": "entity.name.type.class.netuno"
+        },
+        "3": {
+          "name": "keyword.operator.other.netuno"
+        },
+        "4": {
+          "name": "entity.other.inherited-class.netuno"
+        },
+        "5": {
+          "name": "keyword.operator.other.netuno"
+        },
+        "6": {
+          "name": "variable.other.object.netuno"
+        }
+      },
+      "match": "^\\s*(type)\\s+(?:([.a-zA-Z0-9_:]+)(?:\\s*(<)\\s*([.a-zA-Z0-9_:]+))?|(<<)\\s*([.a-zA-Z0-9_:]+))",
+      "name": "meta.class.netuno"
+    },
+    {
+      "captures": {
+        "1": {
+          "name": "keyword.control.module.netuno"
+        },
+        "2": {
+          "name": "entity.name.type.module.netuno"
+        },
+        "3": {
+          "name": "entity.other.inherited-class.module.first.netuno"
+        },
+        "4": {
+          "name": "punctuation.separator.inheritance.netuno"
+        },
+        "5": {
+          "name": "entity.other.inherited-class.module.second.netuno"
+        },
+        "6": {
+          "name": "punctuation.separator.inheritance.netuno"
+        },
+        "7": {
+          "name": "entity.other.inherited-class.module.third.netuno"
+        },
+        "8": {
+          "name": "punctuation.separator.inheritance.netuno"
+        }
+      },
+      "match": "^\\s*(module)\\s+(([A-Z]\\w*(::))?([A-Z]\\w*(::))?([A-Z]\\w*(::))*[A-Z]\\w*)",
+      "name": "meta.module.netuno"
+    },
+    {
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.comment.netuno"
+        }
+      },
+      "comment": "Comment",
+      "match": "(;).*$\\n?",
+      "name": "comment.line.netuno"
+    },
+    {
+      "comment": "Comma Delimiter",
+      "match": ",[ |\t]*",
+      "name": "meta.delimiter.object.comma.netuno"
+    },
+    {
+      "match": "\\.",
+      "name": "meta.delimiter.method.period.netuno"
+    },
+    {
+      "match": "\\(|\\)",
+      "name": "meta.brace.round.netuno"
+    },
+    {
+      "match": "\\[|\\]",
+      "name": "meta.brace.square.netuno"
+    },
+    {
+      "match": "=>|!|\\$|%|&|\\*|\\-\\-|\\-|\\+\\+|\\+|\\/|~|==|=|!=|>=|<<=|>>=|!|&&|\\|\\||\\*=|(?<!\\()\/=|%=|\\+=|\\-=|&=|\\^=",
+      "name": "keyword.operator.netuno"
+    },
+    {
+      "match": "\\b(none|true|false)\\b",
+      "name": "constant.language.netuno"
+    },
+    {
+      "begin": "(\")",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.string.begin.netuno"
+        }
+      },
+      "comment": "String, double-quoted",
+      "end": "(\")",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.string.begin.netuno"
+        }
+      },
+      "name": "string.quoted.double.netuno",
+      "patterns": [
+        {
+          "name": "constant.character.escape.netuno",
+          "match": "\\\\(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|u\\h{,4}|U\\h{,8}|.)"
+        }
+      ]
+    },
+    {
+      "match": "(type|end|next|module|do|else|if|import|return)",
+      "name": "keyword.control.netuno"
+    },
+    {
+      "match": "(break|continue|goto|while|until|for|to|step)",
+      "name": "keyword.control.loop.netuno"
+    },
+    {
+      "match": "(?<!\\.)\\bdo\\b",
+      "name": "keyword.control.start-block.ruby"
+    },
+    {
+      "match": "\\b(string|bool|int|uint|long|ulong|float|double)\\b",
+      "name": "storage.type.netuno"
+    },
+    {
+      "comment": "\\b(string|bool|int|uint|long|ulong|float|double)\\b",
+      "name": "support.function.netuno"
+    },
+    {
+      "match": "\\b((\\d+(?:\\.\\d*)?(f)?)|(((0(x|X)[0-9a-fA-F]+)|(\\d+))(i|I|ul|UL|uL|Ul|u|U|l|L)?))\\b",
+      "name": "constant.numeric.netuno"
+    },
+    {
+      "match": "\\b(private|public)\\b(?![?!])",
+      "name": "keyword.other.special-method.netuno"
+    },
+    {
+      "include": "#var-expr"
+    },
+    {
+      "include": "#function-declaration"
+    },
+    {
+      "include": "#type-annotation"
+    }
+  ],
+  "repository": {
+    "function-declaration": {
+      "patterns": [
+        {
+          "name": "meta.function.netuno",
+          "begin": "(?=[\\s\\b]*(def|sub)(?![_$[:alnum:]]))",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.control.export.netuno"
+            },
+            "2": {
+              "name": "storage.modifier.netuno"
+            },
+            "3": {
+              "name": "storage.modifier.async.netuno"
+            },
+            "4": {
+              "name": "storage.type.function.netuno"
+            },
+            "5": {
+              "name": "keyword.generator.asterisk.netuno"
+            },
+            "6": {
+              "name": "meta.definition.function.netuno entity.name.function.netuno"
+            }
+          },
+          "end": "(?=\\))",
+          "patterns": [
+            {
+              "include": "#var-single-variable"
+            }
+          ]
+        }
+      ]
+    },
+    "var-expr": {
+      "patterns": [
+        {
+          "name": "meta.var.expr.netuno",
+          "begin": "(?=[\\s\\b]*var(?![_$[:alnum:]]))",
+          "end": "(?=[=)\\n])",
+          "patterns": [
+            {
+              "include": "#var-single-variable"
+            }
+          ]
+        }
+      ]
+    },
+    "var-single-variable": {
+      "patterns": [
+        {
+          "name": "meta.var-single-variable.expr.netuno",
+          "begin": "([_$[:alpha:]][_$[:alnum:]]*)",
+          "beginCaptures": {
+            "1": {
+              "name": "meta.definition.variable.netuno variable.other.readwrite.netuno"
+            },
+            "2": {
+              "name": "keyword.operator.definiteassignment.netuno"
+            }
+          },
+          "end": "(?=[=\\),\\n])",
+          "patterns": [
+            {
+              "include": "#type-annotation"
+            }
+          ]
+        }
+      ]
+    },
+    "type-annotation": {
+      "patterns": [
+        {
+          "name": "meta.type.annotation.netuno",
+          "begin": "(:)(?=\\s*\\S)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.operator.type.annotation.netuno"
+            }
+          },
+          "end": "(?<=[_[:alnum:]])([\\s\\b]*)(?=[^=])",
+          "patterns": [
+            {
+              "include": "#type"
+            }
+          ]
+        },
+        {
+          "name": "meta.type.annotation.netuno",
+          "begin": "(:)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.operator.type.annotation.netuno"
+            }
+          },
+          "end": "(?<=[_[:alnum:]])([\\s\\b]*)(?=[^=])",
+          "patterns": [
+            {
+              "include": "#type"
+            }
+          ]
+        }
+      ]
+    },
+    "type": {
+      "patterns": [
+        {
+          "include": "#type-primitive"
+        },
+        {
+          "match": "([_$[:alpha:]][_$[:alnum:]]*)\\s*(?:(\\.)|(\\?\\.(?!\\s*[[:digit:]])))",
+          "captures": {
+            "1": {
+              "name": "entity.name.type.module.netuno"
+            },
+            "2": {
+              "name": "punctuation.accessor.netuno"
+            },
+            "3": {
+              "name": "punctuation.accessor.optional.netuno"
+            }
+          }
+        },
+        {
+          "name": "entity.name.type.netuno",
+          "match": "[_$[:alpha:]][_$[:alnum:]]*"
+        }
+      ]
+    },
+    "type-primitive": {
+      "name": "support.type.primitive.netuno",
+      "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(string|bool|int|uint|long|ulong|float|double)(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+    }
+  },
+  "scopeName": "source.nt"
+}

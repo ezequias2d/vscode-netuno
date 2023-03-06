@@ -1,0 +1,25 @@
+{
+  "name": "netuno-lang",
+  "displayName": "Netuno Lang",
+  "description": "Syntax highlighting for Netuno lang",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.76.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "netuno",
+      "aliases": ["Netuno", "netuno"],
+      "extensions": [".nt"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "netuno",
+      "scopeName": "source.nt",
+      "path": "./syntaxes/netuno.tmLanguage.json"
+    }]
+  }
+}
